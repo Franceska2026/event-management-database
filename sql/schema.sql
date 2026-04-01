@@ -1,8 +1,9 @@
--- TABLE 1: USERS (Supertype)
-CREATE TABLE USERS (
-    user_id    INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name TEXT    NOT NULL,
-    last_name  TEXT    NOT NULL,
-    email      TEXT    UNIQUE NOT NULL,
-    created_at TEXT    DEFAULT CURRENT_DATE
+
+-- TABLE 2: ORGANIZERS (Subtype of USERS)
+CREATE TABLE ORGANIZERS (
+    organizer_id INTEGER PRIMARY KEY,
+    company_name TEXT,
+    phone        TEXT,
+    website      TEXT,
+    FOREIGN KEY (organizer_id) REFERENCES USERS(user_id)
 );
