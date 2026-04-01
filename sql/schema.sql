@@ -38,3 +38,15 @@ CREATE TABLE EVENTS (
     FOREIGN KEY (venue_id)     REFERENCES VENUES(venue_id),
     CHECK (status IN ('Upcoming','Ongoing','Completed','Cancelled'))
 );
+-- TABLE 6: REGISTRATIONS (Bridge table - many-to-many)
+CREATE TABLE REGISTRATIONS (
+    registration_id   INTEGER PRIMARY KEY AUTOINCREMENT,
+    attendee_id       INTEGER NOT NULL,
+    event_id          INTEGER NOT NULL,
+    registration_date TEXT    DEFAULT CURRENT_DATE,
+    status            TEXT    DEFAULT 'Confirmed',
+    FOREIGN KEY (attendee_id) REFERENCES ATTENDEES(attendee_id),
+    FOREIGN KEY (event_id)    REFERENCES EVENTS(event_id),
+    CHECK (status IN ('Confirmed','Cancelled','Waitlisted')),
+    UNIQUE (attendee_id, event_id)
+);
