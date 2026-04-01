@@ -23,3 +23,18 @@ CREATE TABLE VENUES (
     address    TEXT,
     capacity   INTEGER NOT NULL
 );
+-- TABLE 5: EVENTS (Central hub table)
+CREATE TABLE EVENTS (
+    event_id     INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_name   TEXT    NOT NULL,
+    event_date   TEXT    NOT NULL,
+    description  TEXT,
+    category     TEXT,
+    ticket_price REAL    DEFAULT 0,
+    status       TEXT    DEFAULT 'Upcoming',
+    organizer_id INTEGER NOT NULL,
+    venue_id     INTEGER NOT NULL,
+    FOREIGN KEY (organizer_id) REFERENCES ORGANIZERS(organizer_id),
+    FOREIGN KEY (venue_id)     REFERENCES VENUES(venue_id),
+    CHECK (status IN ('Upcoming','Ongoing','Completed','Cancelled'))
+);
