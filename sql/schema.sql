@@ -15,3 +15,11 @@ CREATE TABLE ATTENDEES (
     city          TEXT,
     FOREIGN KEY (attendee_id) REFERENCES USERS(user_id)
 );
+-- TABLE 4: VENUES
+CREATE TABLE VENUES (
+    venue_id   INTEGER PRIMARY KEY AUTOINCREMENT,
+    venue_name TEXT    NOT NULL,
+    city       TEXT    NOT NULL,
+    address    TEXT,
+    capacity   INTEGER NOT NULL
+);
