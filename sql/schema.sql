@@ -50,3 +50,14 @@ CREATE TABLE REGISTRATIONS (
     CHECK (status IN ('Confirmed','Cancelled','Waitlisted')),
     UNIQUE (attendee_id, event_id)
 );
+-- TABLE 7: PAYMENTS
+CREATE TABLE PAYMENTS (
+    payment_id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    registration_id INTEGER NOT NULL,
+    amount          REAL    NOT NULL,
+    payment_date    TEXT    DEFAULT CURRENT_DATE,
+    payment_method  TEXT,
+    payment_status  TEXT    DEFAULT 'Pending',
+    FOREIGN KEY (registration_id) REFERENCES REGISTRATIONS(registration_id),
+    CHECK (payment_status IN ('Paid','Pending','Refunded'))
+);
